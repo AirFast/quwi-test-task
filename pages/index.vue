@@ -87,6 +87,12 @@ const saveProjectName = async () => {
         return;
       }
 
+      if (res.first_errors) {
+        setError(res.first_errors.name);
+
+        return;
+      }
+
       refresh();
 
       showModal.value = false;
