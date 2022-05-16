@@ -79,8 +79,6 @@ const saveProjectName = async () => {
   response
     .json()
     .then((res) => {
-      console.log(res);
-
       if (res.first_errors) {
         setError(res.first_errors.name);
         projectName.value = name;
@@ -101,7 +99,7 @@ const saveProjectName = async () => {
       projectName.value = '';
     })
     .catch((err) => {
-      setError(err.message);
+      console.log(err);
     });
 };
 </script>
