@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type TypeProject = {
+type Project = {
   id: number;
   name: string;
   uid: string;
@@ -12,8 +12,8 @@ type TypeProject = {
   spent_sec_all_time: number;
 };
 
-type TypeData = {
-  projects: TypeProject[];
+type Data = {
+  projects: Project[];
 };
 
 definePageMeta({
@@ -28,7 +28,7 @@ const projectName = ref('');
 const projectId = ref<number>(null);
 const error = ref('');
 
-const { data, refresh } = await useFetch<TypeData>(
+const { data, refresh } = await useFetch<Data>(
   'projects-manage/index?sort=dta_create',
   {
     baseURL: config.API_BASE_URL,
@@ -36,16 +36,13 @@ const { data, refresh } = await useFetch<TypeData>(
   }
 );
 
-const openEditProjectModal = (
-  id: TypeProject['id'],
-  name: TypeProject['name']
-) => {
+const openEditProjectModal = (id: Project['id'], name: Project['name']) => {
   showModal.value = !showModal.value;
   projectId.value = id;
   projectName.value = name;
 };
 
-const setError = (errMessage) => {
+const setError = (errMessage: string) => {
   error.value = errMessage;
 
   setTimeout(() => {
