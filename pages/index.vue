@@ -81,14 +81,15 @@ const saveProjectName = async () => {
     .then((res) => {
       console.log(res);
 
-      if (res.status === 401) {
-        setError(`You're ${res.name}! ${res.message}.`);
+      if (res.first_errors) {
+        setError(res.first_errors.name);
+        projectName.value = name;
 
         return;
       }
 
-      if (res.first_errors) {
-        setError(res.first_errors.name);
+      if (res.status === 401) {
+        setError(`You're ${res.name}! ${res.message}.`);
 
         return;
       }
